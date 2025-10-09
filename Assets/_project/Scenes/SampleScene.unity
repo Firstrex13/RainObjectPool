@@ -411,7 +411,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 407207719}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7b83bb38483c34f89e0dd285e455fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b85551ac1e03564a843222d8e58f44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Platform
 --- !u!1 &410087039
@@ -711,7 +711,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 857089974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7b83bb38483c34f89e0dd285e455fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b85551ac1e03564a843222d8e58f44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Platform
 --- !u!1 &1583463110
@@ -744,7 +744,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15.172767, y: 0.26412675, z: 16.43741}
+  m_LocalScale: {x: 33.688095, y: 0.26412675, z: 41.20201}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 355566693}
@@ -795,7 +795,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 1718422f28da9cd4ab81500866fae9c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -835,10 +835,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1583463110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac7b83bb38483c34f89e0dd285e455fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b85551ac1e03564a843222d8e58f44d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Platform
---- !u!1 &1796784669
+--- !u!1 &1743826082
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -846,43 +846,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1796784671}
-  - component: {fileID: 1796784670}
+  - component: {fileID: 1743826083}
+  - component: {fileID: 1743826084}
   m_Layer: 0
-  m_Name: ObjectPool
+  m_Name: BombSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1796784670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796784669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7929b45d36a6c46a069e99ac7c1aaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
-  _prefab: {fileID: 3250473842152779829, guid: cf6bba726cc8ad44aacbb2ea8fa3b66d, type: 3}
---- !u!4 &1796784671
+--- !u!4 &1743826083
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1796784669}
+  m_GameObject: {fileID: 1743826082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.61267, y: 0.48208, z: -2.78585}
+  m_LocalPosition: {x: 0.19039, y: 0.13206, z: -1.66312}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1743826084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743826082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e5e500c6d638b42af74a272facbec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BombSpawner
+  _prefab: {fileID: 51311110764839870, guid: 630c77451f3cbec4d80a9ab9e605dd9f, type: 3}
+  _cubeSpawner: {fileID: 1945230527}
 --- !u!1 &1945230524
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +895,7 @@ GameObject:
   - component: {fileID: 1945230526}
   - component: {fileID: 1945230527}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: CubeSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,12 +925,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945230524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 391746cbcb2b33f4084d2b1d7ebd5084, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d89d5662178a641aa25786d5e7ebcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  _pool: {fileID: 1796784670}
+  _prefab: {fileID: 401168277919584755, guid: cf6bba726cc8ad44aacbb2ea8fa3b66d, type: 3}
   _position: {x: 0, y: 10, z: 0}
-  _spawnDelay: 0.5
+  _spawnDelay: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -938,5 +939,5 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 355566693}
-  - {fileID: 1796784671}
   - {fileID: 1945230526}
+  - {fileID: 1743826083}
