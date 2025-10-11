@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 
 public class Bomb : DestroybleObject
 {
@@ -12,29 +10,24 @@ public class Bomb : DestroybleObject
 
     [SerializeField] private LayerMask _explosionLayer;
 
-    private float _fadeSpeed = 0.2f;
-
-    private float _maxAlfa = 1f;
-
-    private Color _color;
-
-    private Renderer _renderer;
+    [SerializeField] private FadeEffect _fadeEffect;
 
     private Coroutine _destroy;
 
     public Action<Bomb> Died;
 
-    private void Awake()
-    {
-        _renderer = GetComponent<Renderer>();
-    }
-
     private void OnEnable()
     {
-        _color.a = _maxAlfa;
+        _fadeEffect.Disapeared += DestroyBomb;       
+    }
 
-        _renderer.material.color = _color;
+    private void OnDisable()
+    {
+        _fadeEffect.Disapeared -= DestroyBomb;
+    }
 
+    private void DestroyBomb()
+    {
         if (_destroy != null)
         {
             StopCoroutine(_destroy);
@@ -44,35 +37,12 @@ public class Bomb : DestroybleObject
     }
 
     private IEnumerator DestroyWithDelay()
-    {
-        _color = _renderer.material.color;
-
-        float alfa = _color.a;
-
-        float elapsedTime = 0f;
-
-        float delay = Random.Range(MinDelay, MaxDelay);
-
-        while (elapsedTime < delay)
-        {
-            elapsedTime += Time.deltaTime;
-
-            float normalizedTime = (elapsedTime * _fadeSpeed) / delay;
-
-            _color.a = Mathf.Lerp(alfa, 0, normalizedTime);
-
-            _renderer.material.color = _color;
-
-            yield return null;
-        }
-
-        _color.a = 0;
-
-        _renderer.material.color = _color;
-
+    {    
         Explode();
 
         Died?.Invoke(this);
+
+        yield return null;
     }
 
     private void Explode()
