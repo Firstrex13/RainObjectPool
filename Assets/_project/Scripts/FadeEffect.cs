@@ -15,6 +15,8 @@ public class FadeEffect : DestroybleObject
 
     public Action Disapeared;
 
+
+
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();

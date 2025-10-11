@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool<T> where T : MonoBehaviour
@@ -14,7 +15,7 @@ public class ObjectPool<T> where T : MonoBehaviour
 
         for (int i = 0; i < _poolCapacity; i++)
         {
-            ReturnCube(_prefab);
+            _pool.Enqueue(fillUpPool());
         }
     }
 
@@ -35,7 +36,15 @@ public class ObjectPool<T> where T : MonoBehaviour
     public void ReturnCube(T obj)
     {
         obj.gameObject.SetActive(false);
-        
+
         _pool.Enqueue(obj);
+    }
+
+    private T fillUpPool()
+    {
+        T obj = Object.Instantiate(_prefab);
+        obj.gameObject.SetActive(false);
+
+        return obj;
     }
 }

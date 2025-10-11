@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
-public class Bomb : DestroybleObject
+public class Bomb : MonoBehaviour
 {
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
 
     [SerializeField] private LayerMask _explosionLayer;
 
-    [SerializeField] private FadeEffect _fadeEffect;
+  //  [SerializeField] private FadeEffect _fadeEffect;
 
     private Coroutine _destroy;
 
@@ -18,12 +20,19 @@ public class Bomb : DestroybleObject
 
     private void OnEnable()
     {
-        _fadeEffect.Disapeared += DestroyBomb;       
+      
+       // _fadeEffect.Disapeared += DestroyBomb;
     }
 
     private void OnDisable()
     {
-        _fadeEffect.Disapeared -= DestroyBomb;
+  
+        // _fadeEffect.Disapeared -= DestroyBomb;
+    }
+
+    private void Start()
+    {
+        DestroyBomb();
     }
 
     private void DestroyBomb()
@@ -37,12 +46,14 @@ public class Bomb : DestroybleObject
     }
 
     private IEnumerator DestroyWithDelay()
-    {    
+    {
+        WaitForSeconds delay = new WaitForSeconds(Random.Range(2, 5));
+
+        yield return delay;
+        
         Explode();
 
         Died?.Invoke(this);
-
-        yield return null;
     }
 
     private void Explode()
