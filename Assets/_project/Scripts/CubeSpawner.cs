@@ -13,7 +13,7 @@ public class CubeSpawner : MonoBehaviour
 
     private ObjectPool<Cube> _pool;
 
-    public Action<Vector3> CubeReturned;
+    public event Action<Vector3> CubeReturned;
 
     private void Start()
     {
@@ -44,7 +44,7 @@ public class CubeSpawner : MonoBehaviour
 
     private void ReturnToPool(Cube cube)
     {
-        _pool.ReturnCube(cube);
+        _pool.ReturnObject(cube);
 
         cube.Died -= ReturnToPool;
 

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPool<T> where T : MonoBehaviour
@@ -33,7 +32,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
     }
 
-    public void ReturnCube(T obj)
+    public void ReturnObject(T obj)
     {
         obj.gameObject.SetActive(false);
 

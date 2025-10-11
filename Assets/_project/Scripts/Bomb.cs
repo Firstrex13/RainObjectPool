@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 
 public class Bomb : MonoBehaviour
 {
@@ -12,45 +9,24 @@ public class Bomb : MonoBehaviour
 
     [SerializeField] private LayerMask _explosionLayer;
 
-  //  [SerializeField] private FadeEffect _fadeEffect;
+    [SerializeField] private FadeEffect _fadeEffect;
 
-    private Coroutine _destroy;
-
-    public Action<Bomb> Died;
+    public event Action<Bomb> Died;
 
     private void OnEnable()
     {
-      
-       // _fadeEffect.Disapeared += DestroyBomb;
+
+        _fadeEffect.Disapeared += Destroy;
     }
 
     private void OnDisable()
     {
-  
-        // _fadeEffect.Disapeared -= DestroyBomb;
+
+        _fadeEffect.Disapeared -= Destroy;
     }
 
-    private void Start()
+    private void Destroy()
     {
-        DestroyBomb();
-    }
-
-    private void DestroyBomb()
-    {
-        if (_destroy != null)
-        {
-            StopCoroutine(_destroy);
-        }
-
-        _destroy = StartCoroutine(DestroyWithDelay());
-    }
-
-    private IEnumerator DestroyWithDelay()
-    {
-        WaitForSeconds delay = new WaitForSeconds(Random.Range(2, 5));
-
-        yield return delay;
-        
         Explode();
 
         Died?.Invoke(this);

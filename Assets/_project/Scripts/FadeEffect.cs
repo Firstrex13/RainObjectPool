@@ -13,7 +13,7 @@ public class FadeEffect : DestroybleObject
 
     private Coroutine _destroy;
 
-    public Action Disapeared;
+    public event Action Disapeared;
 
 
 
@@ -22,7 +22,7 @@ public class FadeEffect : DestroybleObject
         _renderer = GetComponent<Renderer>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         _color.a = _maxAlfa;
 
@@ -35,6 +35,7 @@ public class FadeEffect : DestroybleObject
 
         _destroy = StartCoroutine(DestroyWithDelay());
     }
+
 
     private IEnumerator DestroyWithDelay()
     {
@@ -57,7 +58,6 @@ public class FadeEffect : DestroybleObject
             _renderer.material.color = _color;
 
             yield return null;
-
         }
 
         Disapeared?.Invoke();

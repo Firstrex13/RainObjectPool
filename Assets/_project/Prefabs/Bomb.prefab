@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 5894920592399040369}
   - component: {fileID: 7449355713805452886}
   - component: {fileID: 6544010257242271759}
+  - component: {fileID: 3055964805446640455}
   - component: {fileID: 51311110764839870}
+  - component: {fileID: 9112225021901093659}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -140,6 +142,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3055964805446640455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392008009985606186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c477c1bf45de38499b39a58c009040e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DestroybleObject
 --- !u!114 &51311110764839870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,4 +171,16 @@ MonoBehaviour:
   _explosionLayer:
     serializedVersion: 2
     m_Bits: 128
-  delay: 0
+  _fadeEffect: {fileID: 9112225021901093659}
+--- !u!114 &9112225021901093659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392008009985606186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637b9e92794bb334297c3102063a9cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeEffect

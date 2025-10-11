@@ -9,7 +9,7 @@ public class Cube : DestroybleObject
 {
     public bool IsTouched { get; private set; }
 
-    public Action<Cube> Died;
+    public event Action<Cube> Died;
 
     private void OnEnable()
     {

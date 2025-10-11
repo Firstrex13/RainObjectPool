@@ -36,7 +36,7 @@ public class BombSpawner : MonoBehaviour
 
     private void ReturnToPool(Bomb bomb)
     {
-        _pool.ReturnCube(bomb);
+        _pool.ReturnObject(bomb);
 
         bomb.Died -= ReturnToPool;
     }
