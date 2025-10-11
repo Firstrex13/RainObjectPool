@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class FadeEffect : MonoBehaviour
+public class FadeEffect : DestroybleObject
 {
     private float _maxAlfa = 1f;
 
@@ -41,7 +42,7 @@ public class FadeEffect : MonoBehaviour
 
         float elapsedTime = 0f;
 
-        float delay = 2f;
+        float delay = Random.Range(MinDelay, MaxDelay);
 
         while (elapsedTime < delay)
         {
