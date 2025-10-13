@@ -21,9 +21,11 @@ public class CubeSpawner : MonoBehaviour
 
     private void Start()
     {
-        _cubesCount = 5;
+        _cubesCount = 1;
 
         _pool = new ObjectPool<Cube>(_prefab, _cubesCount);
+
+        _pool.Instantiated += OnCubeInstatntiated;
 
         StartCoroutine(SpawnCubes());
     }
@@ -59,5 +61,10 @@ public class CubeSpawner : MonoBehaviour
         CubeReturned?.Invoke(cube.transform.position);
 
         Returned?.Invoke();
+    }
+
+    private void OnCubeInstatntiated()
+    {
+        _cubesCount++;
     }
 }

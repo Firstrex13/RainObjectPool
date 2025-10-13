@@ -22,6 +22,7 @@ public class BombSpawner : MonoBehaviour
     private void OnDisable()
     {
         _cubeSpawner.CubeReturned -= CreateBomb;
+        _pool.Instantiated -= OnBombInstatntiated;
     }
 
     private void Start()
@@ -29,6 +30,8 @@ public class BombSpawner : MonoBehaviour
         _bombsCount = 5;
 
         _pool = new ObjectPool<Bomb>(_prefab, _bombsCount);
+
+        _pool.Instantiated += OnBombInstatntiated;
     }
 
     private void CreateBomb(Vector3 position)
@@ -51,5 +54,10 @@ public class BombSpawner : MonoBehaviour
         bomb.Died -= ReturnToPool;
 
         Returned?.Invoke();
+    }
+
+    private void OnBombInstatntiated()
+    {
+        _bombsCount++;
     }
 }

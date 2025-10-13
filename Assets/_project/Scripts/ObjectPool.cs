@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -7,6 +8,8 @@ public class ObjectPool<T> where T : MonoBehaviour
     private Queue<T> _pool = new Queue<T>();
 
     private T _prefab;
+
+    public event Action Instantiated;
 
     public ObjectPool(T prefab, int count)
     {
@@ -29,6 +32,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         }
         else
         {
+            Instantiated?.Invoke();
             return Object.Instantiate(_prefab);
         }
     }
