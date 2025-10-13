@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BombSpawner : MonoBehaviour
@@ -6,7 +7,12 @@ public class BombSpawner : MonoBehaviour
 
     [SerializeField] private CubeSpawner _cubeSpawner;
 
+    public int _bombsCount { get; private set; }
+
     private ObjectPool<Bomb> _pool;
+
+    public event Action Activated;
+    public event Action Returned;
 
     private void OnEnable()
     {
@@ -20,7 +26,9 @@ public class BombSpawner : MonoBehaviour
 
     private void Start()
     {
-        _pool = new ObjectPool<Bomb>(_prefab);
+        _bombsCount = 5;
+
+        _pool = new ObjectPool<Bomb>(_prefab, _bombsCount);
     }
 
     private void CreateBomb(Vector3 position)
@@ -28,6 +36,8 @@ public class BombSpawner : MonoBehaviour
         Bomb bomb;
 
         bomb = _pool.GetFromPool();
+
+        Activated?.Invoke();
 
         bomb.transform.position = position;
 
@@ -39,5 +49,7 @@ public class BombSpawner : MonoBehaviour
         _pool.ReturnObject(bomb);
 
         bomb.Died -= ReturnToPool;
+
+        Returned?.Invoke();
     }
 }

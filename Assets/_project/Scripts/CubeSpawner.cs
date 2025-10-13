@@ -11,13 +11,19 @@ public class CubeSpawner : MonoBehaviour
 
     [SerializeField] private float _spawnDelay = 1f;
 
+    public int _cubesCount { get; private set; }
+
     private ObjectPool<Cube> _pool;
 
+    public event Action Activated;
+    public event Action Returned;
     public event Action<Vector3> CubeReturned;
 
     private void Start()
     {
-        _pool = new ObjectPool<Cube>(_prefab);
+        _cubesCount = 5;
+
+        _pool = new ObjectPool<Cube>(_prefab, _cubesCount);
 
         StartCoroutine(SpawnCubes());
     }
@@ -34,6 +40,8 @@ public class CubeSpawner : MonoBehaviour
 
             cube = _pool.GetFromPool();
 
+            Activated?.Invoke();
+
             cube.transform.position = randomPosition;
 
             cube.Died += ReturnToPool;
@@ -49,5 +57,7 @@ public class CubeSpawner : MonoBehaviour
         cube.Died -= ReturnToPool;
 
         CubeReturned?.Invoke(cube.transform.position);
+
+        Returned?.Invoke();
     }
 }

@@ -1,18 +1,18 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class ObjectPool<T> where T : MonoBehaviour
 {
     private Queue<T> _pool = new Queue<T>();
 
     private T _prefab;
-    private int _poolCapacity = 5;
 
-    public ObjectPool(T prefab)
+    public ObjectPool(T prefab, int count)
     {
         _prefab = prefab;
 
-        for (int i = 0; i < _poolCapacity; i++)
+        for (int i = 0; i < count; i++)
         {
             _pool.Enqueue(fillUpPool());
         }
@@ -24,6 +24,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         {
             T obj = _pool.Dequeue();
             obj.gameObject.SetActive(true);
+
             return obj;
         }
         else
@@ -34,7 +35,7 @@ public class ObjectPool<T> where T : MonoBehaviour
 
     public void ReturnObject(T obj)
     {
-        obj.gameObject.SetActive(false);
+        obj.gameObject.SetActive(false);     
 
         _pool.Enqueue(obj);
     }
