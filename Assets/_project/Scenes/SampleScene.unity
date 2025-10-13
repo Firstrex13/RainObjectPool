@@ -1269,7 +1269,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 865784776}
+  - component: {fileID: 865784778}
   - component: {fileID: 865784775}
+  - component: {fileID: 865784777}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Untagged
@@ -1289,13 +1291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 984716680f8a32a48bc4320ea269121f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Counter
-  _cubeSpawner: {fileID: 1945230527}
   _bombSpawner: {fileID: 1743826084}
-  _spawnedCubes: 0
   _spawnedBombs: 0
-  _activeCubes: 0
   _activeBombs: 0
-  _createdCubes: 0
   _createdBombs: 0
 --- !u!4 &865784776
 Transform:
@@ -1312,6 +1310,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &865784777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865784774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74d78300c6198c479081270ccd14013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CubesCounter
+  _cubeSpawner: {fileID: 1945230527}
+  _spawnedCubes: 0
+  _activeCubes: 0
+  _createdCubes: 0
+--- !u!114 &865784778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 865784774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c8bd1e1d56d4a47948ec8a418fa507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CounterBasic
 --- !u!1 &952727913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7ce7d65ac173f45ae8278b373d4a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CounterView
-  _counter: {fileID: 865784775}
+  _cubesCounter: {fileID: 865784777}
+  _bombsCounter: {fileID: 865784775}
   _spawnedCubes: {fileID: 1688294364}
   _spawnedBombs: {fileID: 1959120913}
   _activeCubes: {fileID: 2004974588}

@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
   _explosionRadius: 3
-  _explosionForce: 600
+  _explosionForce: 1000
   _explosionLayer:
     serializedVersion: 2
     m_Bits: 128

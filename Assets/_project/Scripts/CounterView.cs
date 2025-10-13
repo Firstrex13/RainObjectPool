@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CounterView : MonoBehaviour
 {
-    [SerializeField] private Counter _counter;
+    [SerializeField] private CubesCounter _cubesCounter;
+    [SerializeField] private BombCounter _bombsCounter;
 
     [SerializeField] private TextMeshProUGUI _spawnedCubes;
     [SerializeField] private TextMeshProUGUI _spawnedBombs;
@@ -14,51 +15,51 @@ public class CounterView : MonoBehaviour
 
     private void OnEnable()
     {
-        _counter.UpdatedInfo += UpdateSpawnedCubesCount;
-        _counter.UpdatedInfo += UpdateSpawnedBombsCount;
-        _counter.UpdatedInfo += UpdateActiveCubesCount;
-        _counter.UpdatedInfo += UpdateActiveBombsCount;
-        _counter.UpdatedInfo += UpdateCreatedCubesCount;
-        _counter.UpdatedInfo += UpdateCreatedBombsCount;
+        _cubesCounter.UpdatedInfo += UpdateSpawnedCubesCount;
+        _bombsCounter.UpdatedInfo += UpdateSpawnedBombsCount;
+        _cubesCounter.UpdatedInfo += UpdateActiveCubesCount;
+        _bombsCounter.UpdatedInfo += UpdateActiveBombsCount;
+        _cubesCounter.UpdatedInfo += UpdateCreatedCubesCount;
+        _bombsCounter.UpdatedInfo += UpdateCreatedBombsCount;
     }
 
     private void OnDisable()
     {
-        _counter.UpdatedInfo -= UpdateSpawnedCubesCount;
-        _counter.UpdatedInfo -= UpdateSpawnedBombsCount;
-        _counter.UpdatedInfo -= UpdateActiveCubesCount;
-        _counter.UpdatedInfo -= UpdateActiveBombsCount;
-        _counter.UpdatedInfo -= UpdateCreatedCubesCount;
-        _counter.UpdatedInfo -= UpdateCreatedBombsCount;
+        _cubesCounter.UpdatedInfo -= UpdateSpawnedCubesCount;
+        _bombsCounter.UpdatedInfo -= UpdateSpawnedBombsCount;
+        _cubesCounter.UpdatedInfo -= UpdateActiveCubesCount;
+        _bombsCounter.UpdatedInfo -= UpdateActiveBombsCount;
+        _cubesCounter.UpdatedInfo -= UpdateCreatedCubesCount;
+        _bombsCounter.UpdatedInfo -= UpdateCreatedBombsCount;
     }
 
     private void UpdateSpawnedCubesCount()
     {
-        UpdateInfo(_spawnedCubes, _counter.SpawnedCubes);
+        UpdateInfo(_spawnedCubes, _cubesCounter.SpawnedCubes);
     }
 
     private void UpdateSpawnedBombsCount()
     {
-        UpdateInfo(_spawnedBombs, _counter.SpawnedBombs);
+        UpdateInfo(_spawnedBombs, _bombsCounter.SpawnedBombs);
     }
 
     private void UpdateActiveCubesCount()
     {
-        UpdateInfo(_activeCubes, _counter.ActiveCubes);
+        UpdateInfo(_activeCubes, _cubesCounter.ActiveCubes);
     }
 
     private void UpdateActiveBombsCount()
     {
-        UpdateInfo(_activeBombs, _counter.ActiveBombs);
+        UpdateInfo(_activeBombs, _bombsCounter.ActiveBombs);
     }
 
     private void UpdateCreatedCubesCount()
     {
-        UpdateInfo(_createdCubes, _counter.CreatedCubes);
+        UpdateInfo(_createdCubes, _cubesCounter.CreatedCubes);
     }
     private void UpdateCreatedBombsCount()
     {
-        UpdateInfo(_createdBombs, _counter.CreatedBombs);
+        UpdateInfo(_createdBombs, _bombsCounter.CreatedBombs);
     }
 
     private void UpdateInfo(TextMeshProUGUI text, int number)

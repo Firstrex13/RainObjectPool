@@ -13,6 +13,7 @@ public class BombSpawner : MonoBehaviour
 
     public event Action Activated;
     public event Action Returned;
+    public event Action Instantiated;
 
     private void OnEnable()
     {
@@ -59,5 +60,6 @@ public class BombSpawner : MonoBehaviour
     private void OnBombInstatntiated()
     {
         _bombsCount++;
+        Instantiated?.Invoke();
     }
 }

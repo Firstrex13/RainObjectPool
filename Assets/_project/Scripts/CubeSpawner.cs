@@ -17,11 +17,12 @@ public class CubeSpawner : MonoBehaviour
 
     public event Action Activated;
     public event Action Returned;
+    public event Action Instantiated;
     public event Action<Vector3> CubeReturned;
 
     private void Start()
     {
-        _cubesCount = 1;
+        _cubesCount = 5;
 
         _pool = new ObjectPool<Cube>(_prefab, _cubesCount);
 
@@ -66,5 +67,6 @@ public class CubeSpawner : MonoBehaviour
     private void OnCubeInstatntiated()
     {
         _cubesCount++;
+        Instantiated?.Invoke();
     }
 }
