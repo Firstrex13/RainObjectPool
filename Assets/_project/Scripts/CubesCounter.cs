@@ -18,18 +18,18 @@ public class CubesCounter : CounterBasic
 
     private void OnEnable()
     {
-        _cubeSpawner.Instantiated += IncreseCreatedCubesCount;
-        _cubeSpawner.Activated += IncreaseActivatedCubes;
-        _cubeSpawner.Activated += IncreaseSpawnedCubes;
-        _cubeSpawner.Returned += DicreaseActivatedCubes;
+        _cubeSpawner.Instantiated += OnIncreseCreatedCubesCount;
+        _cubeSpawner.Activated += OnIncreaseActivatedCubes;
+        _cubeSpawner.Activated += OnIncreaseSpawnedCubes;
+        _cubeSpawner.Returned += OnDicreaseActivatedCubes;
     }
 
     private void OnDisable()
     {
-        _cubeSpawner.Instantiated -= IncreseCreatedCubesCount;
-        _cubeSpawner.Activated -= IncreaseActivatedCubes;
-        _cubeSpawner.Activated -= IncreaseSpawnedCubes;
-        _cubeSpawner.Returned -= DicreaseActivatedCubes;
+        _cubeSpawner.Instantiated -= OnIncreseCreatedCubesCount;
+        _cubeSpawner.Activated -= OnIncreaseActivatedCubes;
+        _cubeSpawner.Activated -= OnIncreaseSpawnedCubes;
+        _cubeSpawner.Returned -= OnDicreaseActivatedCubes;
     }
 
     private void Start()
@@ -37,22 +37,22 @@ public class CubesCounter : CounterBasic
         _createdCubes = _cubeSpawner._cubesCount;
     }
 
-    private void IncreseCreatedCubesCount()
+    private void OnIncreseCreatedCubesCount()
     {
         _createdCubes = IncreseCreated(_createdCubes);
     }
 
-    private void IncreaseActivatedCubes()
+    private void OnIncreaseActivatedCubes()
     {
         _activeCubes = IncreaseActivated(_activeCubes);
     }
 
-    private void DicreaseActivatedCubes()
+    private void OnDicreaseActivatedCubes()
     {
         _activeCubes = DicreaseActivated(_activeCubes);
     }
 
-    private void IncreaseSpawnedCubes()
+    private void OnIncreaseSpawnedCubes()
     {
         _spawnedCubes = IncreaseSpawned(_spawnedCubes);
     }

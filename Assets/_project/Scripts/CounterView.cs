@@ -15,49 +15,49 @@ public class CounterView : MonoBehaviour
 
     private void OnEnable()
     {
-        _cubesCounter.UpdatedInfo += UpdateSpawnedCubesCount;
-        _bombsCounter.UpdatedInfo += UpdateSpawnedBombsCount;
-        _cubesCounter.UpdatedInfo += UpdateActiveCubesCount;
-        _bombsCounter.UpdatedInfo += UpdateActiveBombsCount;
-        _cubesCounter.UpdatedInfo += UpdateCreatedCubesCount;
-        _bombsCounter.UpdatedInfo += UpdateCreatedBombsCount;
+        _cubesCounter.UpdatedInfo += OnUpdateSpawnedCubesCount;
+        _bombsCounter.UpdatedInfo += OnUpdateSpawnedBombsCount;
+        _cubesCounter.UpdatedInfo += OnUpdateActiveCubesCount;
+        _bombsCounter.UpdatedInfo += OnUpdateActiveBombsCount;
+        _cubesCounter.UpdatedInfo += OnUpdateCreatedCubesCount;
+        _bombsCounter.UpdatedInfo += OnUpdateCreatedBombsCount;
     }
 
     private void OnDisable()
     {
-        _cubesCounter.UpdatedInfo -= UpdateSpawnedCubesCount;
-        _bombsCounter.UpdatedInfo -= UpdateSpawnedBombsCount;
-        _cubesCounter.UpdatedInfo -= UpdateActiveCubesCount;
-        _bombsCounter.UpdatedInfo -= UpdateActiveBombsCount;
-        _cubesCounter.UpdatedInfo -= UpdateCreatedCubesCount;
-        _bombsCounter.UpdatedInfo -= UpdateCreatedBombsCount;
+        _cubesCounter.UpdatedInfo -= OnUpdateSpawnedCubesCount;
+        _bombsCounter.UpdatedInfo -= OnUpdateSpawnedBombsCount;
+        _cubesCounter.UpdatedInfo -= OnUpdateActiveCubesCount;
+        _bombsCounter.UpdatedInfo -= OnUpdateActiveBombsCount;
+        _cubesCounter.UpdatedInfo -= OnUpdateCreatedCubesCount;
+        _bombsCounter.UpdatedInfo -= OnUpdateCreatedBombsCount;
     }
 
-    private void UpdateSpawnedCubesCount()
+    private void OnUpdateSpawnedCubesCount()
     {
         UpdateInfo(_spawnedCubes, _cubesCounter.SpawnedCubes);
     }
 
-    private void UpdateSpawnedBombsCount()
+    private void OnUpdateSpawnedBombsCount()
     {
         UpdateInfo(_spawnedBombs, _bombsCounter.SpawnedBombs);
     }
 
-    private void UpdateActiveCubesCount()
+    private void OnUpdateActiveCubesCount()
     {
         UpdateInfo(_activeCubes, _cubesCounter.ActiveCubes);
     }
 
-    private void UpdateActiveBombsCount()
+    private void OnUpdateActiveBombsCount()
     {
         UpdateInfo(_activeBombs, _bombsCounter.ActiveBombs);
     }
 
-    private void UpdateCreatedCubesCount()
+    private void OnUpdateCreatedCubesCount()
     {
         UpdateInfo(_createdCubes, _cubesCounter.CreatedCubes);
     }
-    private void UpdateCreatedBombsCount()
+    private void OnUpdateCreatedBombsCount()
     {
         UpdateInfo(_createdBombs, _bombsCounter.CreatedBombs);
     }

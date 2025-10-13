@@ -16,18 +16,18 @@ public class BombCounter : CounterBasic
 
     private void OnEnable()
     {
-        _bombSpawner.Activated += IncreaseActivatedBombs;
-        _bombSpawner.Activated += IncreaseSpawnedBombs;
-        _bombSpawner.Returned += DicreaseActivatedBombs;
-        _bombSpawner.Instantiated += IncreseCreatedBombsCount;
+        _bombSpawner.Activated += OnIncreaseActivatedBombs;
+        _bombSpawner.Activated += OnIncreaseSpawnedBombs;
+        _bombSpawner.Returned += OnDicreaseActivatedBombs;
+        _bombSpawner.Instantiated += OnIncreseCreatedBombsCount;
     }
 
     private void OnDisable()
     {
-        _bombSpawner.Activated -= IncreaseActivatedBombs;
-        _bombSpawner.Activated -= IncreaseSpawnedBombs;
-        _bombSpawner.Returned -= DicreaseActivatedBombs;
-        _bombSpawner.Instantiated -= IncreseCreatedBombsCount;
+        _bombSpawner.Activated -= OnIncreaseActivatedBombs;
+        _bombSpawner.Activated -= OnIncreaseSpawnedBombs;
+        _bombSpawner.Returned -= OnDicreaseActivatedBombs;
+        _bombSpawner.Instantiated -= OnIncreseCreatedBombsCount;
     }
 
     private void Start()
@@ -35,22 +35,22 @@ public class BombCounter : CounterBasic
         _createdBombs = _bombSpawner._bombsCount;
     }
 
-    private void IncreseCreatedBombsCount()
+    private void OnIncreseCreatedBombsCount()
     {
         _createdBombs = IncreseCreated(_createdBombs);
     }
 
-    private void IncreaseActivatedBombs()
+    private void OnIncreaseActivatedBombs()
     {
         _activeBombs = IncreaseActivated(_activeBombs);
     }
 
-    private void DicreaseActivatedBombs()
+    private void OnDicreaseActivatedBombs()
     {
         _activeBombs = DicreaseActivated(_activeBombs);
     }
 
-    private void IncreaseSpawnedBombs()
+    private void OnIncreaseSpawnedBombs()
     {
         _spawnedBombs = IncreaseSpawned(_spawnedBombs);
     }
