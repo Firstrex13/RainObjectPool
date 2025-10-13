@@ -11,7 +11,7 @@ public class CubeSpawner : MonoBehaviour
 
     [SerializeField] private float _spawnDelay = 1f;
 
-    public int _cubesCount { get; private set; }
+    public int _cubesStartCount { get; private set; }
 
     private ObjectPool<Cube> _pool;
 
@@ -22,9 +22,9 @@ public class CubeSpawner : MonoBehaviour
 
     private void Start()
     {
-        _cubesCount = 5;
+        _cubesStartCount = 5;
 
-        _pool = new ObjectPool<Cube>(_prefab, _cubesCount);
+        _pool = new ObjectPool<Cube>(_prefab, _cubesStartCount);
 
         _pool.Instantiated += OnCubeInstatntiated;
 
@@ -66,7 +66,7 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnCubeInstatntiated()
     {
-        _cubesCount++;
+        _cubesStartCount++;
         Instantiated?.Invoke();
     }
 }

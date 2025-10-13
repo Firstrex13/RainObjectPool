@@ -34,7 +34,7 @@ public class CubesCounter : CounterBasic
 
     private void Start()
     {
-        _createdCubes = _cubeSpawner._cubesCount;
+        _createdCubes = _cubeSpawner._cubesStartCount;
     }
 
     private void OnIncreseCreatedCubesCount()

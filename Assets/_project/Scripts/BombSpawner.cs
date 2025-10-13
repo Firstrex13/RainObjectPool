@@ -7,7 +7,7 @@ public class BombSpawner : MonoBehaviour
 
     [SerializeField] private CubeSpawner _cubeSpawner;
 
-    public int _bombsCount { get; private set; }
+    public int _bombsStartCount { get; private set; }
 
     private ObjectPool<Bomb> _pool;
 
@@ -28,9 +28,9 @@ public class BombSpawner : MonoBehaviour
 
     private void Start()
     {
-        _bombsCount = 5;
+        _bombsStartCount = 5;
 
-        _pool = new ObjectPool<Bomb>(_prefab, _bombsCount);
+        _pool = new ObjectPool<Bomb>(_prefab, _bombsStartCount);
 
         _pool.Instantiated += OnBombInstatntiated;
     }
@@ -59,7 +59,7 @@ public class BombSpawner : MonoBehaviour
 
     private void OnBombInstatntiated()
     {
-        _bombsCount++;
+        _bombsStartCount++;
         Instantiated?.Invoke();
     }
 }
