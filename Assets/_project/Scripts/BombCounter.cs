@@ -32,7 +32,7 @@ public class BombCounter : CounterBasic
 
     private void Start()
     {
-        _createdBombs = _bombSpawner._bombsStartCount;
+        _createdBombs = _bombSpawner.BombsStartCount;
     }
 
     private void OnIncreseCreatedBombsCount()

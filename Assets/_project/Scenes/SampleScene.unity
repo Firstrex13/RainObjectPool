@@ -1269,7 +1269,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 865784776}
-  - component: {fileID: 865784778}
   - component: {fileID: 865784775}
   - component: {fileID: 865784777}
   m_Layer: 0
@@ -1326,18 +1325,6 @@ MonoBehaviour:
   _spawnedCubes: 0
   _activeCubes: 0
   _createdCubes: 0
---- !u!114 &865784778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865784774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c8bd1e1d56d4a47948ec8a418fa507, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CounterBasic
 --- !u!1 &952727913
 GameObject:
   m_ObjectHideFlags: 0

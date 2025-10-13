@@ -9,6 +9,8 @@ public class ObjectPool<T> where T : MonoBehaviour
 
     private T _prefab;
 
+    public event Action Activated;
+    public event Action Returned;
     public event Action Instantiated;
 
     public ObjectPool(T prefab, int count)
@@ -27,7 +29,7 @@ public class ObjectPool<T> where T : MonoBehaviour
         {
             T obj = _pool.Dequeue();
             obj.gameObject.SetActive(true);
-
+            Activated?.Invoke();
             return obj;
         }
         else
@@ -42,6 +44,8 @@ public class ObjectPool<T> where T : MonoBehaviour
         obj.gameObject.SetActive(false);     
 
         _pool.Enqueue(obj);
+
+        Returned?.Invoke();
     }
 
     private T fillUpPool()

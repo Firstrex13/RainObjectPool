@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
 
-public class BombSpawner : MonoBehaviour
+public class BombSpawner : BaseSpawner
 {
     [SerializeField] private Bomb _prefab;
 
     [SerializeField] private CubeSpawner _cubeSpawner;
 
-    public int _bombsStartCount { get; private set; }
-
     private ObjectPool<Bomb> _pool;
 
     public event Action Activated;
     public event Action Returned;
-    public event Action Instantiated;
+
+    public int BombsStartCount => ObjectStartCount;
 
     private void OnEnable()
     {
@@ -28,9 +27,9 @@ public class BombSpawner : MonoBehaviour
 
     private void Start()
     {
-        _bombsStartCount = 5;
+        ObjectStartCount = 5;
 
-        _pool = new ObjectPool<Bomb>(_prefab, _bombsStartCount);
+        _pool = new ObjectPool<Bomb>(_prefab, ObjectStartCount);
 
         _pool.Instantiated += OnBombInstatntiated;
     }
@@ -59,7 +58,6 @@ public class BombSpawner : MonoBehaviour
 
     private void OnBombInstatntiated()
     {
-        _bombsStartCount++;
-        Instantiated?.Invoke();
+        Created();
     }
 }

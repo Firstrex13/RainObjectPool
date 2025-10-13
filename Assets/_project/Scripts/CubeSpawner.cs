@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CubeSpawner : MonoBehaviour
+public class CubeSpawner : BaseSpawner
 {
     [SerializeField] private Cube _prefab;
 
@@ -11,22 +11,27 @@ public class CubeSpawner : MonoBehaviour
 
     [SerializeField] private float _spawnDelay = 1f;
 
-    public int _cubesStartCount { get; private set; }
-
     private ObjectPool<Cube> _pool;
 
     private Coroutine _spawnCubes;
 
     public event Action Activated;
     public event Action Returned;
-    public event Action Instantiated;
+
     public event Action<Vector3> CubeReturned;
+
+    public int CubesStartCount => ObjectStartCount;
+
+    private void OnDisable()
+    {
+        _pool.Instantiated -= OnCubeInstatntiated;
+    }
 
     private void Start()
     {
-        _cubesStartCount = 5;
+        ObjectStartCount = 5;
 
-        _pool = new ObjectPool<Cube>(_prefab, _cubesStartCount);
+        _pool = new ObjectPool<Cube>(_prefab, ObjectStartCount);
 
         _pool.Instantiated += OnCubeInstatntiated;
 
@@ -35,10 +40,10 @@ public class CubeSpawner : MonoBehaviour
             StopCoroutine(_spawnCubes);
         }
 
-        StartCoroutine(SpawnCubes());
+        StartCoroutine(Spawn());
     }
 
-    private IEnumerator SpawnCubes()
+    private IEnumerator Spawn()
     {
         var delay = new WaitForSeconds(_spawnDelay);
 
@@ -73,7 +78,6 @@ public class CubeSpawner : MonoBehaviour
 
     private void OnCubeInstatntiated()
     {
-        _cubesStartCount++;
-        Instantiated?.Invoke();
+        Created();
     }
 }

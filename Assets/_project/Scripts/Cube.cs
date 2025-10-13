@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-
-
 public class Cube : DestroybleObject
 {
     private Coroutine _destroyWithDelay;
