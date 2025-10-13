@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class Cube : DestroybleObject
 {
+    private Coroutine _destroyWithDelay;
+
     public bool IsTouched { get; private set; }
 
     public event Action<Cube> Died;
@@ -26,6 +28,11 @@ public class Cube : DestroybleObject
             };
 
             IsTouched = true;
+
+            if(_destroyWithDelay != null)
+            {
+                StopCoroutine(_destroyWithDelay);
+            }
 
             StartCoroutine(DestroyWithDelay());
         }

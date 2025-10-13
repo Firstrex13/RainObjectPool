@@ -17,12 +17,12 @@ public class BombSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _cubeSpawner.CubeReturned += CreateBomb;
+        _cubeSpawner.CubeReturned += OnCreateBomb;
     }
 
     private void OnDisable()
     {
-        _cubeSpawner.CubeReturned -= CreateBomb;
+        _cubeSpawner.CubeReturned -= OnCreateBomb;
         _pool.Instantiated -= OnBombInstatntiated;
     }
 
@@ -35,7 +35,7 @@ public class BombSpawner : MonoBehaviour
         _pool.Instantiated += OnBombInstatntiated;
     }
 
-    private void CreateBomb(Vector3 position)
+    private void OnCreateBomb(Vector3 position)
     {
         Bomb bomb;
 
@@ -45,14 +45,14 @@ public class BombSpawner : MonoBehaviour
 
         bomb.transform.position = position;
 
-        bomb.Died += ReturnToPool;
+        bomb.Died += OnReturnToPool;
     }
 
-    private void ReturnToPool(Bomb bomb)
+    private void OnReturnToPool(Bomb bomb)
     {
         _pool.ReturnObject(bomb);
 
-        bomb.Died -= ReturnToPool;
+        bomb.Died -= OnReturnToPool;
 
         Returned?.Invoke();
     }

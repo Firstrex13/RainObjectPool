@@ -15,6 +15,8 @@ public class CubeSpawner : MonoBehaviour
 
     private ObjectPool<Cube> _pool;
 
+    private Coroutine _spawnCubes;
+
     public event Action Activated;
     public event Action Returned;
     public event Action Instantiated;
@@ -27,6 +29,11 @@ public class CubeSpawner : MonoBehaviour
         _pool = new ObjectPool<Cube>(_prefab, _cubesStartCount);
 
         _pool.Instantiated += OnCubeInstatntiated;
+
+        if (_spawnCubes != null)
+        {
+            StopCoroutine(_spawnCubes);
+        }
 
         StartCoroutine(SpawnCubes());
     }
