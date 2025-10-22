@@ -1,31 +1,16 @@
-using System;
 using UnityEngine;
 
-public class BombSpawner : BaseSpawner
+public class BombSpawner : BaseSpawner<Bomb>
 {
+    [SerializeField] private BombCounter _bombCounter;
+
     [SerializeField] private Bomb _prefab;
 
     [SerializeField] private CubeSpawner _cubeSpawner;
 
-    private ObjectPool<Bomb> _pool;
-
-    public event Action Activated;
-    public event Action Returned;
-
     public int BombsStartCount => ObjectStartCount;
 
-    private void OnEnable()
-    {
-        _cubeSpawner.CubeReturned += OnCreateBomb;
-    }
-
-    private void OnDisable()
-    {
-        _cubeSpawner.CubeReturned -= OnCreateBomb;
-        _pool.Instantiated -= OnBombInstatntiated;
-    }
-
-    private void Start()
+    private void Awake()
     {
         ObjectStartCount = 5;
 
@@ -34,26 +19,43 @@ public class BombSpawner : BaseSpawner
         _pool.Instantiated += OnBombInstatntiated;
     }
 
+    private void OnEnable()
+    {
+        _cubeSpawner.CubeReturned += OnCreateBomb;
+
+        _pool.Instantiated += _bombCounter.OnIncreseCreatedBombsCount;
+        _pool.Activated += _bombCounter.OnIncreaseActivatedBombs;
+        _pool.Activated += _bombCounter.OnIncreaseSpawnedBombs;
+        _pool.Returned += _bombCounter.OnDicreaseActivatedBombs;
+    }
+
+    private void OnDisable()
+    {
+        _cubeSpawner.CubeReturned -= OnCreateBomb;
+        _pool.Instantiated -= OnBombInstatntiated;
+
+        _pool.Instantiated -= _bombCounter.OnIncreseCreatedBombsCount;
+        _pool.Activated -= _bombCounter.OnIncreaseActivatedBombs;
+        _pool.Activated -= _bombCounter.OnIncreaseSpawnedBombs;
+        _pool.Returned -= _bombCounter.OnDicreaseActivatedBombs;
+    }
+
     private void OnCreateBomb(Vector3 position)
     {
         Bomb bomb;
 
         bomb = _pool.GetFromPool();
 
-        Activated?.Invoke();
-
         bomb.transform.position = position;
 
         bomb.Died += OnReturnToPool;
     }
 
-    private void OnReturnToPool(Bomb bomb)
+    protected override void OnReturnToPool(Bomb bomb)
     {
-        _pool.ReturnObject(bomb);
+        base._pool.ReturnObject(bomb);
 
         bomb.Died -= OnReturnToPool;
-
-        Returned?.Invoke();
     }
 
     private void OnBombInstatntiated()

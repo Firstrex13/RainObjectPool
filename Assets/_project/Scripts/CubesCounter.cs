@@ -16,43 +16,27 @@ public class CubesCounter : CounterBasic
 
     public int CreatedCubes => _createdCubes;
 
-    private void OnEnable()
-    {
-        _cubeSpawner.Instantiated += OnIncreseCreatedCubesCount;
-        _cubeSpawner.Activated += OnIncreaseActivatedCubes;
-        _cubeSpawner.Activated += OnIncreaseSpawnedCubes;
-        _cubeSpawner.Returned += OnDicreaseActivatedCubes;
-    }
-
-    private void OnDisable()
-    {
-        _cubeSpawner.Instantiated -= OnIncreseCreatedCubesCount;
-        _cubeSpawner.Activated -= OnIncreaseActivatedCubes;
-        _cubeSpawner.Activated -= OnIncreaseSpawnedCubes;
-        _cubeSpawner.Returned -= OnDicreaseActivatedCubes;
-    }
-
     private void Start()
     {
         _createdCubes = _cubeSpawner.CubesStartCount;
     }
 
-    private void OnIncreseCreatedCubesCount()
+    public void OnIncreseCreatedCubesCount()
     {
         _createdCubes = IncreseCreated(_createdCubes);
     }
 
-    private void OnIncreaseActivatedCubes()
+    public void OnIncreaseActivatedCubes()
     {
         _activeCubes = IncreaseActivated(_activeCubes);
     }
 
-    private void OnDicreaseActivatedCubes()
+    public void OnDicreaseActivatedCubes()
     {
         _activeCubes = DicreaseActivated(_activeCubes);
     }
 
-    private void OnIncreaseSpawnedCubes()
+    public void OnIncreaseSpawnedCubes()
     {
         _spawnedCubes = IncreaseSpawned(_spawnedCubes);
     }

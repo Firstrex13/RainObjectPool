@@ -1,15 +1,18 @@
-using System;
 using UnityEngine;
 
-public class BaseSpawner : MonoBehaviour
+public class BaseSpawner<T> : MonoBehaviour where T : MonoBehaviour
 {
-    protected int ObjectStartCount;
+    protected ObjectPool<T> _pool;
 
-    public event Action Instantiated;
+    protected int ObjectStartCount;
 
     protected void Created()
     {
         ObjectStartCount++;
-        Instantiated?.Invoke();
+    }
+
+    protected virtual void OnReturnToPool(T obj)
+    {
+        _pool.ReturnObject(obj);
     }
 }
